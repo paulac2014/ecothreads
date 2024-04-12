@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Sale Details</h3>
+    <div style="border-bottom: 1px solid #ccc; margin-bottom: 20px;"></div>
+
+    <p style="font-size: 12px;"><strong>Sale ID:</strong> <span class="badge text-bg-secondary rounded-pill">{{ sale.id }}</span></p>
+    <p style="font-size: 12px;"><strong>Customer:</strong> {{ sale.customer }}</p>
+    <p style="font-size: 12px;"><strong>Date of Transaction:</strong> {{ sale.date_of_transaction }}</p>
+    <p style="font-size: 12px;"><strong>Total Sale Price:</strong> {{ sale.total_sale_price }}</p>
+
+    <div class="d-flex justify-content-center" style="font-size: 12px;">
+        <table class="table table-bordered">
+        <tr>
+            <th class="text-center">Product</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Price at Sale</th>
+        </tr>
+            {% for sale_item in sale.saleitem_set.all %}
+            <tr>
+                <td class="text-center">{{ sale_item.product }}</td>
+                <td class="text-center">{{ sale_item.quantity }}</td>
+                <td class="text-center">{{ sale_item.price_at_sale }}</td>
+            </tr>
+            {% endfor %}
+    
+        </table>
+    </div>
+
+    <a href="{% url 'sale_edit' sale.id %}" class="btn btn-warning my-1 px-2 btn-sm" style="font-size: 12px;">Update</a>
+    <a href="{% url 'sale_list' %}" class="btn btn-secondary my-1 px-2 btn-sm" style="font-size: 12px;">Back to Sales History</a>
+{% endblock %}

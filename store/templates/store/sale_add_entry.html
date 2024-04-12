@@ -1,0 +1,86 @@
+<!-- templates/store/sale_add_entry.html -->
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ block.super }}
+<style>
+    input[id^="id_saleitem_set-"][id$="-DELETE"] {
+        display: none !important;
+    }
+
+    label[for="id_saleitem_set-0-DELETE"] {
+        display: none !important;;
+    }
+    
+</style>
+
+{% endblock %}
+
+{% block content %}
+<h3>Enter Sale</h3>
+<div style="border-bottom: 1px solid #ccc; margin-bottom: 20px;"></div>
+<form method="post" id="saleForm" style="font-size: 12px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id="formset-container">
+        {{ formset.management_form }}
+        {% for form in formset %}
+            <div class="formset-row">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn btn-outline-primary btn-sm" id="add-item" style="font-size: 12px;">Add Product</button>
+    <button type="button" class="btn btn-outline-danger btn-sm" id="remove-item" style="font-size: 12px;">Remove Last Product</button><br><br>
+    <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px;">Submit Sale</button>
+    <a href="{% url 'sale_list' %}" class="btn btn-secondary my-4 px-4 btn-sm"style="font-size: 12px;">Back to Sales History</a>
+    
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addButton = document.getElementById('add-item');
+        const removeButton = document.getElementById('remove-item');
+        const container = document.getElementById('formset-container');
+        const totalForms = document.getElementById('id_{{ formset.prefix }}-TOTAL_FORMS');
+        
+        const updateElementIndex = function(el, prefix, index) {
+            const idRegex = new RegExp('(' + prefix + '-\\d+)');
+            const replacement = prefix + '-' + index;
+            if (el.id) el.id = el.id.replace(idRegex, replacement);
+            if (el.name) el.name = el.name.replace(idRegex, replacement);
+        };
+        
+        addButton.addEventListener('click', function() {
+            let formCount = parseInt(totalForms.getAttribute('value'), 10);
+            let newForm = container.querySelector('.formset-row').cloneNode(true);
+            newForm.innerHTML = newForm.innerHTML.replace(/__prefix__/g, formCount);
+            container.appendChild(newForm);
+            let formRows = container.querySelectorAll('.formset-row');
+            formRows[formCount].querySelectorAll('input, select, textarea').forEach(function(element) {
+                updateElementIndex(element, '{{ formset.prefix }}', formCount);
+                // Clear the value of the element. Important for text inputs.
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.value = '';
+                }
+                // Reset select element to its first option
+                if (element.tagName === 'SELECT') {
+                    element.selectedIndex = 0;
+                }
+            });
+            totalForms.setAttribute('value', formCount + 1);
+        });
+    
+        removeButton.addEventListener('click', function() {
+            let formCount = parseInt(totalForms.getAttribute('value'), 10);
+            if(formCount > 1) {
+                container.removeChild(container.lastElementChild);
+                totalForms.setAttribute('value', formCount - 1);
+            }
+        });
+    });
+    
+</script>
+    
+{% endblock %}

@@ -1,0 +1,76 @@
+<!-- templates/store/sale_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Create New Sale</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" id="id_items_sold" name="items_sold" value="{{ form.items_sold.value|default_if_none:'' }}">
+    <div id="product-entries"></div> <!-- Placeholder for dynamically added products -->
+    <button type="submit">Save Sale</button>
+  </form>
+  
+  
+
+  
+  <script>
+    console.log(JSON.stringify(productEntries)); // Assuming productEntries is your array of product details
+    document.getElementById('id_items_sold').value = JSON.stringify(productEntries);
+    // JavaScript to handle adding products and updating the items_sold field
+  </script>
+
+{% endblock %}
+
+<!--
+write the JavaScript to allow users to select products and specify quantities.
+This script would then construct a list of product entries, update the items_sold hidden form field with the
+JSON-serialized list, and handle the display of selected products.
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const productSelect = document.getElementById('product-select');
+        const quantityInput = document.getElementById('quantity-input');
+        const addProductButton = document.getElementById('add-product');
+        const productEntriesDiv = document.getElementById('product-entries');
+        const itemsSoldInput = document.getElementById('items_sold');
+    
+        let itemsSold = [];
+    
+        addProductButton.onclick = function() {
+            const productId = productSelect.value;
+            const quantity = parseInt(quantityInput.value);
+            const productPrice = productSelect.options[productSelect.selectedIndex].getAttribute('data-price');
+            const productName = productSelect.options[productSelect.selectedIndex].text;
+    
+            if (!productId || !quantity) {
+                alert('Please select a product and specify a quantity.');
+                return;
+            }
+    
+            // Construct the product entry
+            const productEntry = {
+                product_id: productId,
+                quantity: quantity,
+                price: parseFloat(productPrice).toFixed(2)  // Ensures the price is in a correct format
+            };
+            
+            // Add to the itemsSold array
+            itemsSold.push(productEntry);
+    
+            // Update the hidden input field
+            itemsSoldInput.value = JSON.stringify(itemsSold);
+    
+            // Optionally, display the added product in the productEntriesDiv
+            const entryDiv = document.createElement('div');
+            entryDiv.textContent = `${productName} x ${quantity} - ${productPrice} each`;
+            productEntriesDiv.appendChild(entryDiv);
+    
+            // Reset selections
+            productSelect.selectedIndex = 0;
+            quantityInput.value = 1;
+        };
+    });
+    </script>
+    
+  -->

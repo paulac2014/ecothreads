@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Sales History for {{ customer_name }}</h2>
+{% if sales %}
+    <ul>
+    {% for sale in sales %}
+        <li>
+            Sale #<a href="{% url 'sale_detail' sale.id %}">{{ sale.id }}</a> - {{ sale.date_of_transaction|date:"Y-m-d" }} - Total: ${{ sale.total_sale_price|floatformat:2 }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No sales history for this customer.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Product Details</h2>
+
+<!-- Image Display -->
+{% if object.image %}
+    <div>
+        <img src="{{ object.image.url }}" alt="{{ object.name }}" style="max-width: 400px; height: auto;">
+    </div>
+{% endif %}
+
+<div>
+    <strong>Name:</strong> {{ object.name }}<br>
+    <strong>Price:</strong> {{ object.price }}<br>
+    <strong>Category:</strong> {{ object.category }}<br>
+    <strong>Material:</strong> {{ object.material }}<br>
+</div>
+<a href="{% url 'product_update' object.id %}">Edit</a> |
+<a href="{% url 'product_delete' object.id %}">Delete</a>
+<a href="{% url 'product_list' %}">Back to Product List</a>
+{% endblock %}

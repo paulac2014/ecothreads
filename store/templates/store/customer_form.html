@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>{% if object %}Edit Customer{% else %}Add Customer{% endif %}</h3>
+<div style="border-bottom: 1px solid #ccc; margin-bottom: 20px;"></div>
+  <form method="post" style="font-size: 12px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px;">Submit</button>
+    <a href="{% url 'sale_list' %}" class="btn btn-secondary my-2 px-2 btn-sm"style="font-size: 12px;">Back to Customer List</a>
+  </form>
+{% endblock %}

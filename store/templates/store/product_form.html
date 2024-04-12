@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>{% if object %}Edit Product{% else %}Add Product{% endif %}</h3>
+<div style="border-bottom: 1px solid #ccc; margin-bottom: 20px;"></div>
+<form method="post" enctype="multipart/form-data" style="font-size: 12px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success my-1 px-2 btn-sm" style="font-size: 12px;">Submit</button>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary my-1 px-2 btn-sm" style="font-size: 12px;">Back to Product List</a>
+    
+</form>
+
+
+{% endblock %}

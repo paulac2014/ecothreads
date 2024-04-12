@@ -1,0 +1,38 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to EcoThreads</h1>
+<p>This is the home page for the EcoThreads Store Management System.</p>
+
+<div class="card" style="width: 25rem">
+    <div class="card-body">
+      <i class="fas fa-line-chart fa-2x p-4 bg-primary"></i>
+      <div class="mt-2 lead">Customers:</div>
+      <h2 class="card-title" style="font-size:1.5em;">8.2k</h2>
+      <p class="small">January 1 - March 31  <br> <i class="fa fa-globe"></i> Worldwide</p>
+      <p class="text-success">
+        <i class="fa fa-angle-up"></i> 27.4%
+        <span style="font-size: 0.9em" class="ms-2 text-muted">Since last year</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="card" style="width: 25rem">
+    <div class="card-body">
+        <h3 class="lead">Average Rating:</h3>
+        <i class="bi bi-star-fill star-icon" style="color: gold;"></i>
+        <i class="bi bi-star-fill star-icon" style="color: gold;"></i>
+        <i class="bi bi-star-fill star-icon" style="color: gold;"></i>
+        <i class="bi bi-star-fill star-icon" style="color: gold;"></i>
+
+    
+      <h2 class="card-title" style="font-size:2em;">4.2 </h2>
+
+      <p class="card-text"><br>Based on 4,156 ratings</p>
+    </div>
+  </div>
+
+  
+{% endblock %}
+

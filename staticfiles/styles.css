@@ -1,0 +1,111 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #ededed;
+  font-weight: 500;
+  font-size: small;
+}
+
+#sidebar {
+  min-height: 100vh;
+  width: 300px; /* Adjust the width as needed */
+  box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.6); /* Add shadow to the sidebar with a larger offset and more visible shadow */
+  background: linear-gradient(-45deg, #475571 10%, #202635 100%); 
+  
+}
+.container {
+  max-width: calc(100vw - 300px); /* Calculate the maximum width */
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+
+.card {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+
+.nav-link {
+  color: #9eacc6;
+  font-family: "Quicksand", sans-serif;
+  font-size: larger;
+  font-weight: 550;
+  text-transform: uppercase;
+}
+
+.nav-link:hover{
+  color: #5bb3ad;
+}
+
+.nav-link i {
+    font-size: 1rem; /* Adjust the size as needed */
+
+}
+
+/* Style for the active menu item */
+.nav-link.active {
+  background-color: #333f55; /* Background color of the active menu item */
+  color: #fff; /* Text color of the active menu item */
+  /* Bold text for the active menu item */
+  position: relative; /* Position relative for positioning the pseudo-element */
+}
+
+/* Pseudo-element for the blue line */
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -4px; /* Position the pseudo-element to the left of the menu item */
+  height: 100%;
+  width: 6px;
+  background-color: #5bb3ad;
+}
+
+/* Style for the nested submenu */
+.nav-item-sub .nav-link {
+  font-size: 0.8rem; /* Adjust the font size as needed */
+  padding-left: 50px; /* Indent the submenu items to the right */
+  font-family: "Quicksand", sans-serif;
+  text-transform: none;
+}
+
+/* Ensure the nested submenu items are not bold */
+.nav-item-sub .nav-link.active {
+  font-weight: normal;}
+
+.main-content {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+      overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
+  }
+
+
+  .main-content {
+      margin-left: 250px;
+  }
+}
+
+/* Remove any custom scrollbar styles for #sidebar */
+#sidebar::-webkit-scrollbar {
+  display: none;
+}

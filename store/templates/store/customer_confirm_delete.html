@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Wait a minute!</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <p style="font-size: 15px;">Are you sure you want to delete "{{ object.name }}"?</p>
+
+    <button type="submit" class="btn btn-danger btn-sm">Confirm</button>
+    <a href="{% url 'customer_list' %}" class="btn btn-outline-dark btn-sm">Cancel</a>
+
+  </form>
+{% endblock %}

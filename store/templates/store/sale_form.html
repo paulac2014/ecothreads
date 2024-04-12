@@ -1,0 +1,46 @@
+<!-- sale_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create a Sale</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Sale</button>
+</form>
+
+
+<!-- Product Selection -->
+<select name="product" id="id_product">
+    {% for product in products %}
+    <option value="{{ product.id }}" data-product-price="{{ product.price }}">{{ product.name }}</option>
+    {% endfor %}
+</select>
+
+<!-- Quantity Input -->
+<input type="number" name="quantity" id="id_quantity" min="1">
+
+<!-- Button to Add Product -->
+<button type="button" id="add_product">Add Product</button>
+
+<input type="hidden" name="items_sold" id="id_items_sold">
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("add_product").addEventListener("click", function() {
+            let productId = document.getElementById("id_product").value;
+            let quantity = document.getElementById("id_quantity").value;
+            let price = document.getElementById("id_product").selectedOptions[0].getAttribute('data-product-price');
+            // Ensure this element exists for displaying selected items
+            let itemsDiv = document.getElementById("selected_items");
+            // Update hidden field logic here...
+        });
+    });
+    
+    console.log(productId, quantity, price);  // Check if values are correct
+
+
+    </script>
+    
+{% endblock %}

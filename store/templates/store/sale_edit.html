@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Edit Sale #{{ sale.id }}</h3>
+    
+<div style="border-bottom: 1px solid #ccc; margin-bottom: 20px;"></div>
+    <form method="post" style="font-size: 12px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form.as_p }}
+        {% endfor %}
+        <button type="submit" class="btn btn-warning my-1 px-2 btn-sm" style="font-size: 12px;">Update</button>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary my-1 px-2 btn-sm" style="font-size: 12px;">Back to Sales History</a>
+    
+    </form>
+    
+
+
+    
+{% endblock %}

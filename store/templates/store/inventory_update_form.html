@@ -1,0 +1,14 @@
+<!-- templates/store/inventory_update_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3>Update Stock</h3>
+  <div style="border-bottom: 1px solid #ccc; margin-bottom: 20px;"></div>
+  <p style="font-size: 12px;">What is the new quantity for the product {{ product_name }}?</p>
+  <form method="post" style="font-size: 12px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning my-2 px-4" style="font-size: 12px;">Update</button>
+    <a href="{% url 'inventory_list' %}" class="btn btn-secondary" style="font-size: 12px;">Back to Inventory</a>
+  </form>
+{% endblock %}
